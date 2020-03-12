@@ -22,9 +22,9 @@ on:
     types: started
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
-  CONFIG_FILE: B70.config
+  REPO_URL: https://github.com/Lienol/openwrt
+  REPO_BRANCH: dev-lean-lede
+  CONFIG_FILE: HIWIFI_B70.config
   DIY_SH: diy_B70.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
