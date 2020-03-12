@@ -25,7 +25,7 @@ env:
   REPO_URL: https://github.com/Lienol/openwrt
   REPO_BRANCH: dev-lean-lede
   CONFIG_FILE: HIWIFI_B70.config
-  DIY_SH: diy_B70.sh
+  DIY_SH: diy.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
