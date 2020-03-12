@@ -15,7 +15,7 @@ on:
     branches:
       - master
     paths:
-      - 'B70.config'
+      - 'HIWIFI_B70.config'
 #  schedule:
 #    - cron: 0 8 * * 5
   watch:
