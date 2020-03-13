@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build OpenWrt For B70
+name: Build OpenWrt For B70_1
 
 on:
   release:
@@ -15,7 +15,7 @@ on:
     branches:
       - master
     paths:
-      - 'B70.config'
+      - 'B70_1.config'
 #  schedule:
 #    - cron: 0 8 * * 5
   watch:
@@ -24,7 +24,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: B70.config
+  CONFIG_FILE: B70_1.config
   DIY_SH: diy.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
