@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build OpenWrt For K2P
+name: Build Lean's OpenWrt For K2T
 
 on:
   release:
@@ -15,16 +15,16 @@ on:
     branches:
       - master
     paths:
-      - 'K2P.config'
+      - 'Lean_K2T.config'
 #  schedule:
 #    - cron: 0 8 * * 5
-  watch:
-    types: started
+  #watch:
+  #  types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: K2P.config
+  CONFIG_FILE: Lean_K2T.config
   DIY_SH: diy.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
