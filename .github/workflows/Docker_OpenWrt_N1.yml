@@ -1,4 +1,4 @@
-name:  Build Docker_OpenWrt_N1
+name: Build Docker_OpenWrt_N1
 
 on:
   schedule:
