@@ -12,6 +12,9 @@ on:
   watch:
     types: started
 
+env:
+  SSH_ACTIONS: true
+  TZ: Asia/Shanghai
     
 jobs:
   build:
@@ -34,13 +37,17 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
     
-    - name: Config - n1 docker openwrt build config
+    - name: Config - Docker_N1 OpenWrt Build Config
       run: |
         [ -e Docker_N1/diy.sh ] && mv Docker_N1/diy.sh openwrt/diy.sh
         cp Docker_OpenWrt_N1.config openwrt/.config
         cd openwrt
         [ -e diy.sh ] && chmod +x diy.sh && bash diy.sh
         make defconfig
+
+    - name: SSH connection to Actions
+      uses: molun/debugger-action@master
+      if: env.SSH_ACTIONS == 'true'
     
     - name: Download - openwrt build dependencies
       run: |
