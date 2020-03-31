@@ -26,7 +26,7 @@ env:
   REPO_BRANCH: v19.07.2
   CONFIG_FILE: OpenWrt_B70.config
   DIY_SH: diy.sh
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
@@ -61,10 +61,10 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Import external feeds
-      working-directory: ./openwrt
-      run: |
-        git clone https://github.com/Lienol/openwrt-package package/lienol
+    #- name: Import external feeds
+    #  working-directory: ./openwrt
+    #  run: |
+    #    git clone https://github.com/Lienol/openwrt-package package/lienol
 
     - name: Load custom configuration
       run: |
@@ -75,7 +75,7 @@ jobs:
         ../$DIY_SH
 
     - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
+      uses: molun/debugger-action@master
       if: env.SSH_ACTIONS == 'true'
 
     - name: Download package
