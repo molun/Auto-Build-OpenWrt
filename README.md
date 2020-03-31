@@ -1,8 +1,8 @@
 # Auto-Build-OpenWrt
 
-[![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/P3TERX/Actions-OpenWrt/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/molun/Auto-Build-OpenWrt/blob/master/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/P3TERX/Actions-OpenWrt.svg?style=flat-square&label=Stars&logo=github)](https://github.com/P3TERX/Actions-OpenWrt/stargazers)
-[![GitHub Forks](https://github.com/molun/Auto-Build-OpenWrt.svg?style=flat-square&label=Forks&logo=github)](https://github.com/molun/Auto-Build-OpenWrt/fork)
+[![GitHub Forks](https://img.shields.io/github/forks/P3TERX/Actions-OpenWrt.svg?style=flat-square&label=Forks&logo=github)](https://github.com/P3TERX/Actions-OpenWrt/fork)
 
 Build OpenWrt using GitHub Actions
 
