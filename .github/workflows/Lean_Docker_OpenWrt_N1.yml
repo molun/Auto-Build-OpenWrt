@@ -25,8 +25,10 @@ jobs:
 
     - name: Clone source code
       env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
-        REPO_BRANCH: master
+        REPO_URL: https://github.com/Lienol/openwrt
+        REPO_BRANCH: dev-lean-lede
+      #  REPO_URL: https://github.com/coolsnowwolf/lede
+      #  REPO_BRANCH: master
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         
     - name: Update - openwrt source update and install 
