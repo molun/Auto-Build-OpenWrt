@@ -1,0 +1,14 @@
+automount
+autosamba
+blockd
+htop
+usb2
+frpc
+mwan3
+samba
+passwall
+ssr-plus
+syncdial
+ttyd
+unblockmusic
+nano

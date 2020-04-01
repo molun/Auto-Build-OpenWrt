@@ -1,0 +1,10 @@
+automount
+autosamba
+blockd
+frpc
+mwan3
+samba
+syncdial
+ttyd
+unblockmusic
+nano
