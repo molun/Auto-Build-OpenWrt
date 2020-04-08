@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Lienol_OpenWrt_A
+name: Build Lienol_OpenWrt_dev-19.07_B70
 
 on:
   release:
@@ -15,7 +15,7 @@ on:
     branches:
       - master
     paths:
-      - 'Lienol_OpenWrt_A.config'
+      - 'Lienol_OpenWrt_dev-19.07_B70.config'
   schedule:
     - cron: 0 8 * * 5
   watch:
@@ -23,8 +23,8 @@ on:
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: dev-master
-  CONFIG_FILE: Lienol_OpenWrt_A.config
+  REPO_BRANCH: dev-19.07
+  CONFIG_FILE: Lienol_OpenWrt_dev-19.07_B70.config
   DIY_SH: diy.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
@@ -110,5 +110,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: Lienol_OpenWrt_A
+        name: Lienol_OpenWrt_dev-19.07_B70
         path: ${{ env.FIRMWARE }}
