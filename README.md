@@ -29,6 +29,10 @@ Build OpenWrt using GitHub Actions
 - [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
 - [Lienol's OpenWrt](https://github.com/Lienol/openwrt)
 - [P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
+- [Cowtransfer](https://cowtransfer.com)
+- [WeTransfer](https://wetransfer.com/)
+- [Mikubill/transfer](https://github.com/Mikubill/transfer)
+
 ## License
 
 [MIT](https://github.com/molun/Auto-Build-OpenWrt/blob/master/LICENSE) © MOLUN
