@@ -9,8 +9,8 @@ on:
       - '.config.n1.docker'
       - 'n1/**'
       - '.github/workflows/Lienol_Docker_OpenWrt_N1.yml'
-  #watch:
-  #  types: [started]
+  watch:
+    types: [started]
 env:
   SSH_ACTIONS: false
     
