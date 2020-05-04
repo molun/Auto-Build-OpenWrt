@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Lean_LEDE_B70-NEW
+name: Build Lean_LEDE_B70_NEW
 
 on:
   repository_dispatch:
@@ -16,7 +16,7 @@ on:
     branches:
       - master
     paths:
-      - 'Lean_LEDE_B70.config'
+      - 'Lean_LEDE_B70_NEW.config'
   schedule:
     - cron: 0 6 1/3 * *
   watch:
@@ -26,10 +26,10 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: Lean_LEDE_B70.config
+  CONFIG_FILE: Lean_LEDE_B70_NEW.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
