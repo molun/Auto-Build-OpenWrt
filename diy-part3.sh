@@ -13,8 +13,12 @@
 
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
+sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
 
 # Define My Package
-git clone https://github.com/fw876/helloworld.git                                   package/molun/luci-app-ssr-plus
-git clone https://github.com/rufengsuixing/luci-app-adguardhome.git                 package/molun/luci-app-adguardhome
-git clone https://github.com/vernesong/OpenClash.git                                package/molun/luci-app-openclash
+#git clone https://github.com/fw876/helloworld.git package/molun/luci-app-ssr-plus
+#git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/molun/luci-app-adguardhome
+#git clone https://github.com/vernesong/OpenClash.git package/molun/luci-app-openclash
+#git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
+#git clone https://github.com/kenzok8/small.git package/small

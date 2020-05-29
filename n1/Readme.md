@@ -1,2 +1,3 @@
 编译N1适用的适用docker运行的openwrt镜像  
-基于Lean和Lienol源码  
+基于Lean和Lienol源码
+由于Lean和Lienol删除了部分代码，这里采用了第三方仓库

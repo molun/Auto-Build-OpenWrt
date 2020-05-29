@@ -1,4 +1,4 @@
-name: Lienol_Docker_OpenWrt_N1
+name: Lean_Docker_LEDE_N1
 on:
   schedule:
     - cron:  0 7 * * 6
@@ -8,11 +8,14 @@ on:
     paths:
       - '.config.n1.docker'
       - 'n1/**'
-      - '.github/workflows/Lienol_Docker_OpenWrt_N1.yml'
+      - '.github/workflows/Lean_Docker_LEDE_N1.yml'
   watch:
     types: [started]
+
 env:
   SSH_ACTIONS: false
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master  
     
 jobs:
   build:
@@ -20,12 +23,13 @@ jobs:
     steps:
 
     - name: Checkout - clone repository
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Install - system build dependencies
       run: |
         sudo swapoff /swapfile
         sudo rm -rf /swapfile /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
         sudo -E apt-get -qq update
         sudo -E apt-get -yqq install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip pigz
         sudo -E apt-get -yqq autoremove --purge
@@ -33,7 +37,7 @@ jobs:
 
     - name: Download - openwrt source download
       run: |
-        git clone -b dev-19.07 https://github.com/Lienol/openwrt
+        git clone $REPO_URL openwrt
     
     - name: mount - link /mnt
       run: |
@@ -43,6 +47,8 @@ jobs:
     - name: Update - openwrt source update and install 
       run: |
         cd openwrt
+        git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
+        git clone https://github.com/kenzok8/small.git package/small
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         
@@ -53,7 +59,11 @@ jobs:
         cd openwrt
         [ -e diy.sh ] && chmod +x diy.sh && bash diy.sh
         make defconfig
-        
+
+    - name: SSH connection to Actions
+      uses: molun/debugger-action@master
+      if: env.SSH_ACTIONS == 'true'
+      
     - name: Download - openwrt build dependencies
       run: |
         cd openwrt
@@ -68,10 +78,6 @@ jobs:
       run: |
         cp openwrt/bin/targets/armvirt/64/openwrt-armvirt-64-default-rootfs.tar.gz n1
         sudo cp -r n1 /mnt
-        
-    - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
-      if: env.SSH_ACTIONS == 'true'
         
     - name: Image - build docker image
       run: |
