@@ -23,8 +23,8 @@ on:
     types: started
 
 env:
-  REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: dev-lean-lede
+  REPO_URL: https://github.com/Lienol/lean-lede
+  REPO_BRANCH: mod
   CONFIG_FILE: Lienol_LEDE_B70.config
   DIY_SH: diy.sh
   SSH_ACTIONS: false
