@@ -28,7 +28,7 @@ env:
   CONFIG_FILE: Lienol_LEDE_B70.config
   DIY_SH: diy.sh
   SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: false
