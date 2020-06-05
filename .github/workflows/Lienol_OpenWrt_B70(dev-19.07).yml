@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Lienol_OpenWrt_HC5962
+name: Build Lienol_OpenWrt_B70(dev-19.07)
 
 on:
   repository_dispatch:
