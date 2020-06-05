@@ -20,7 +20,7 @@ on:
       - 'n1/**'
       - '.github/workflows/OpenWrt_N1.yml'
   schedule:
-    - cron: 0 8 * * 5
+    - cron: 0 6 1/3 * *
   watch:
     types: started
 
@@ -29,7 +29,7 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: OpenWrt_N1.config
-  DIY_P1_SH: diy-part3.sh
+  DIY_P1_SH: diy-part0.sh
   DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
