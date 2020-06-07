@@ -16,7 +16,7 @@ on:
     branches:
       - master
     paths:
-      - 'Lienol_OpenWrt_HC5962.config'
+      - 'Lienol_OpenWrt_B70(dev-19.07).config'
   schedule:
     - cron: 0 6 1/3 * *
   watch:
@@ -26,7 +26,7 @@ env:
   REPO_URL:  https://github.com/Lienol/openwrt
   REPO_BRANCH: dev-19.07
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: Lienol_OpenWrt_HC5962.config
+  CONFIG_FILE: Lienol_OpenWrt_B70(dev-19.07).config
   DIY_P1_SH: diy-part0.sh
   DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
