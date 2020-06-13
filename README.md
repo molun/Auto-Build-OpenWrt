@@ -8,6 +8,17 @@ Build OpenWrt using GitHub Actions
 
 [Read the details in P3TERX blog (in Chinese) | 中文教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 
+## Status
+
+![Build Lean_LEDE_B70](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_B70/badge.svg)
+![Build Lean_LEDE_K2P](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_K2P/badge.svg)
+![Build Lean_LEDE_K2T](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_K2T/badge.svg)
+![Build Lean_LEDE_Redmi_AC2100](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_Redmi_AC2100/badge.svg)
+![Build Lienol_OpenWrt_B70(dev-19.07)](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lienol_OpenWrt_B70(dev-19.07)/badge.svg)
+![Build Lienol_OpenWrt_B70(dev-master)](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lienol_OpenWrt_B70(dev-master)/badge.svg)
+![Build OpenWrt_B70](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20OpenWrt_B70/badge.svg)
+![Build OpenWrt_N1](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20OpenWrt_N1/badge.svg)
+
 ## Usage
 
 - Click the [Use this template](https://github.com/molun/Auto-Build-OpenWrt/generate) button to create a new repository.
