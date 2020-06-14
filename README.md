@@ -11,13 +11,14 @@ Build OpenWrt using GitHub Actions
 ## Status
 
 ![Build Lean_LEDE_B70](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_B70/badge.svg)
-![Build Lean_LEDE_K2P](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_K2P/badge.svg)
-![Build Lean_LEDE_K2T](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_K2T/badge.svg)
-![Build Lean_LEDE_Redmi_AC2100](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_Redmi_AC2100/badge.svg)
 ![Build Lienol_OpenWrt_B70(dev-19.07)](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lienol_OpenWrt_B70(dev-19.07)/badge.svg)
 ![Build Lienol_OpenWrt_B70(dev-master)](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lienol_OpenWrt_B70(dev-master)/badge.svg)
 ![Build OpenWrt_B70](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20OpenWrt_B70/badge.svg)
 ![Build OpenWrt_N1](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20OpenWrt_N1/badge.svg)
+![Build Lean_Docker_LEDE_N1](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_Docker_LEDE_N1/badge.svg)
+![Build Lean_LEDE_K2P](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_K2P/badge.svg)
+![Build Lean_LEDE_K2T](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_K2T/badge.svg)
+![Build Lean_LEDE_Redmi_AC2100](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_Redmi_AC2100/badge.svg)
 
 ## Usage
 
