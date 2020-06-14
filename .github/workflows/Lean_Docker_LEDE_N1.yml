@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Lean_Docker_LEDE_N1
+name: Build Lean_Docker_LEDE_N1
 on:
   repository_dispatch:
   release:
