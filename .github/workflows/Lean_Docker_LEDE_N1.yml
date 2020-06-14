@@ -1,7 +1,16 @@
+#=================================================
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+# Lisence: MIT
+# Author: P3TERX
+# Blog: https://p3terx.com
+#=================================================
+
 name: Lean_Docker_LEDE_N1
 on:
-  schedule:
-    - cron:  0 7 * * 6
+  repository_dispatch:
+  release:
+    types: published
   push:
     branches:
       - master
@@ -9,41 +18,59 @@ on:
       - '.config.n1.docker'
       - 'n1/**'
       - '.github/workflows/Lean_Docker_LEDE_N1.yml'
+  schedule:
+    - cron: 0 6 1/3 * *
   watch:
-    types: [started]
+    types: started
 
 env:
-  SSH_ACTIONS: false
   REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master  
-    
+  REPO_BRANCH: master
+  FEEDS_CONF: feeds.conf.default
+  CONFIG_FILE: Lean_Docker_LEDE_N1.config
+  DIY_P1_SH: diy-part0.sh
+  DIY_P2_SH: diy-part2.sh
+  SSH_ACTIONS: false
+  UPLOAD_BIN_DIR: true
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: true
+  UPLOAD_WETRANSFER: true
+  TZ: Asia/Shanghai
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    if: github.event.repository.owner.id == github.event.sender.id
+
     steps:
+    - name: Checkout
+      uses: actions/checkout@master
 
-    - name: Checkout - clone repository
-      uses: actions/checkout@v2
-
-    - name: Install - system build dependencies
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo swapoff /swapfile
-        sudo rm -rf /swapfile /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
-        sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
-        sudo -E apt-get -yqq install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip pigz
-        sudo -E apt-get -yqq autoremove --purge
+        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-1804)
+        sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
+        sudo timedatectl set-timezone "$TZ"
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
 
-    - name: Download - openwrt source download
+    - name: Clone source code
+      working-directory: /workdir
       run: |
-        git clone $REPO_URL openwrt
-    
+        df -hT $PWD
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+
     - name: mount - link /mnt
       run: |
         sudo mkdir -p -m 777 /mnt/openwrt/staging_dir
         mkdir -p openwrt/staging_dir && ln -s /mnt/openwrt/staging_dir openwrt/staging_dir
-        
+
     - name: Update - openwrt source update and install 
       run: |
         cd openwrt
@@ -51,34 +78,47 @@ jobs:
         git clone https://github.com/kenzok8/small.git package/small
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-        
+
     - name: Config - n1 docker openwrt build config
       run: |
         [ -e n1/diy.sh ] && mv n1/diy.sh openwrt/diy.sh
         cp .config.n1.docker openwrt/.config
         cd openwrt
         [ -e diy.sh ] && chmod +x diy.sh && bash diy.sh
-        make defconfig
 
     - name: SSH connection to Actions
-      uses: molun/debugger-action@master
-      if: env.SSH_ACTIONS == 'true'
-      
-    - name: Download - openwrt build dependencies
+      uses: P3TERX/debugger-action@master
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
+
+    - name: Download package
+      id: package
       run: |
         cd openwrt
+        make defconfig
         make download -j8
-        
-    - name: Build - make openwrt source
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Compile the firmware
+      id: compile
       run: |
         cd openwrt
-        make -j$(nproc)
-        
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc) || make -j1 || make -j1 V=s
+        echo "::set-output name=status::success"
+        grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
+        [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)"
+        echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
+
+    - name: Check space usage
+      if: (!cancelled())
+      run: df -hT
+
     - name: Docker file - copy Docker file
       run: |
         cp openwrt/bin/targets/armvirt/64/openwrt-armvirt-64-default-rootfs.tar.gz n1
         sudo cp -r n1 /mnt
-        
+
     - name: Image - build docker image
       run: |
         cd /mnt/n1
@@ -87,5 +127,43 @@ jobs:
     - name: Upload - push to artifact file
       uses: actions/upload-artifact@v1
       with:
-        name: docker-n1
+        name: Lean_Docker_LEDE_N1
         path: /mnt/n1/opt/imgs
+
+
+    - name: Upload bin directory
+      uses: actions/upload-artifact@master
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+      with:
+        name: Lean_Docker_LEDE_N1_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: /mnt/n1/opt/imgs
+
+    - name: Organize files
+      id: organize
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      run: |
+        cd /mnt/n1/opt/imgs
+        rm -rf packages
+        echo "::set-env name=FIRMWARE::$PWD"
+        echo "::set-output name=status::success"
+
+    - name: Upload firmware directory
+      uses: actions/upload-artifact@master
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        name: Lean_Docker_LEDE_N1${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE }}
+
+    - name: Upload firmware to cowtransfer
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
+        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
+
+    - name: Upload firmware to WeTransfer
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
+        echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
