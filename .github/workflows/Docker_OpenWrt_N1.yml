@@ -17,10 +17,10 @@ on:
     paths:
       - 'Docker_OpenWrt_N1.config'
       - 'Docker_N1/**'
-  schedule:
-    - cron: 0 6 1/3 * *
-  watch:
-    types: started
+#  schedule:
+#    - cron: 0 6 1/3 * *
+#  watch:
+#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede

@@ -1,7 +1,7 @@
 name: Lienol_Docker_OpenWrt_N1
 on:
-  schedule:
-    - cron:  0 7 * * 6
+#  schedule:
+#    - cron:  0 7 * * 6
   push:
     branches:
       - master
@@ -9,8 +9,8 @@ on:
       - '.config.n1.docker'
       - 'n1/**'
       - '.github/workflows/Lienol_Docker_OpenWrt_N1.yml'
-  watch:
-    types: [started]
+#  watch:
+#    types: [started]
 env:
   SSH_ACTIONS: false
     
