@@ -1,8 +1,0 @@
-automount
-autosamba
-mwan3
-syncdial
-samba
-nano
-ttyd
-nano

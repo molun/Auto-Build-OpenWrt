@@ -1,9 +1,0 @@
-automount
-autosamba
-aria2
-cfdisk
-fdisk
-frpc
-guest-wifi
-hd-idle
-usb-printer
