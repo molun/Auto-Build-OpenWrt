@@ -18,7 +18,7 @@ on:
     paths:
       - 'Lean_LEDE_HC5962.config'
   schedule:
-    - cron: 0 6 1/3 * *
+ #   - cron: 0 6 1/3 * *
   watch:
     types: started
 
