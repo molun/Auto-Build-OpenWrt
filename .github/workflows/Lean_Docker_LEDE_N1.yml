@@ -7,6 +7,7 @@
 #=================================================
 
 name: Build Lean_Docker_LEDE_N1
+
 on:
   repository_dispatch:
   release:
@@ -15,7 +16,7 @@ on:
     branches:
       - master
     paths:
-      - '.config.n1.docker'
+      - 'Lean_Docker_LEDE_N1.config'
       - 'n1/**'
       - '.github/workflows/Lean_Docker_LEDE_N1.yml'
   schedule:
@@ -81,8 +82,9 @@ jobs:
 
     - name: Config - n1 docker openwrt build config
       run: |
+        [ -e files ] && mv files openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         [ -e n1/diy.sh ] && mv n1/diy.sh openwrt/diy.sh
-        cp .config.n1.docker openwrt/.config
         cd openwrt
         [ -e diy.sh ] && chmod +x diy.sh && bash diy.sh
 
