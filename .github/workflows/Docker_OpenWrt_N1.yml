@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build OpenWrt_N1
+name: Build Docker_OpenWrt_N1
 
 on:
   repository_dispatch:
