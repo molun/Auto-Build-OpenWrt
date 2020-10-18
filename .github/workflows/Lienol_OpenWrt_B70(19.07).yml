@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Lienol_OpenWrt_B70(dev-master)
+name: Build Lienol_OpenWrt_B70(19.07)
 
 on:
   repository_dispatch:
@@ -16,7 +16,7 @@ on:
     branches:
       - main
     paths:
-      - 'Lienol_OpenWrt_B70(dev-master).config'
+      - 'Lienol_OpenWrt_B70(19.07).config'
   schedule:
     - cron: 0 6 1/3 * *
   watch:
@@ -24,9 +24,9 @@ on:
 
 env:
   REPO_URL:  https://github.com/Lienol/openwrt
-  REPO_BRANCH: dev-master
+  REPO_BRANCH: 19.07
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: Lienol_OpenWrt_B70(dev-master).config
+  CONFIG_FILE: Lienol_OpenWrt_B70(19.07).config
   DIY_P1_SH: diy-part0.sh
   DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
