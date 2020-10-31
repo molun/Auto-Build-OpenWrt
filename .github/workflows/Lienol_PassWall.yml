@@ -24,10 +24,10 @@ on:
 #    types: started
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/Lienol/openwrt
+  REPO_BRANCH: main
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: lede_passwall.config
+  CONFIG_FILE: Lienol_PassWall.config
   DIY_P1_SH: diy-part0.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
