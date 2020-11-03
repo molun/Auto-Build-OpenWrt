@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build lede_passwall
+name: Build Lienol_PassWall_HC5962
 
 on:
   repository_dispatch:
