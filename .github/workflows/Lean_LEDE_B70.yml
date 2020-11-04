@@ -30,7 +30,7 @@ env:
   CONFIG_FILE: Lean_LEDE_B70.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
@@ -175,6 +175,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
+        release_name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
 
