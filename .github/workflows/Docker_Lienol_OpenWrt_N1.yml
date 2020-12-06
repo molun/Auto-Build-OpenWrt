@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Docker_OpenWrt_N1
+name: Build Docker_Lienol_OpenWrt_N1
 
 on:
   repository_dispatch:
@@ -16,23 +16,23 @@ on:
     branches:
       - main
     paths:
-      - 'OpenWrt_N1.config'
+      - 'Docker_Lienol_OpenWrt_N1.config'
       - 'n1/**'
-      - '.github/workflows/OpenWrt_N1.yml'
+      - '.github/workflows/Docker_Lienol_OpenWrt_N1.yml'
 #  schedule:
 #    - cron: 0 6 1/3 * *
   watch:
     types: started
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: v19.07.4
+  REPO_URL: https://github.com/Lienol/openwrt
+  REPO_BRANCH: 19.07
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: OpenWrt_N1.config
+  CONFIG_FILE: Docker_Lienol_OpenWrt_N1.config
   DIY_P1_SH: diy-part0.sh
   DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
@@ -72,26 +72,20 @@ jobs:
         sudo mkdir -p -m 777 /mnt/openwrt/staging_dir
         mkdir -p openwrt/staging_dir && ln -s /mnt/openwrt/staging_dir openwrt/staging_dir
 
-    - name: Load custom feeds
+    - name: Update - openwrt source update and install 
       run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
-
-    - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
-
-    - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+        git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
+        git clone https://github.com/kenzok8/small.git package/small
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
 
     - name: Config - n1 docker openwrt build config
       run: |
-        [ -e files ] && mv files openwrt/files
+        [ -e n1/diy.sh ] && mv n1/diy.sh openwrt/diy.sh
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
+        [ -e diy.sh ] && chmod +x diy.sh && bash diy.sh
 
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@main
@@ -134,7 +128,7 @@ jobs:
     - name: Upload - push to artifact file
       uses: actions/upload-artifact@v1
       with:
-        name: docker-n1
+        name: Lean_Docker_LEDE_N1
         path: /mnt/n1/opt/imgs
 
 
@@ -142,7 +136,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: Lean_Docker_LEDE_N1_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: /mnt/n1/opt/imgs
 
     - name: Organize files
@@ -158,7 +152,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: docker-n1${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: Lean_Docker_LEDE_N1${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer

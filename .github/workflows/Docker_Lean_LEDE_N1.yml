@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Lienol_Docker_OpenWrt_N1
+name: Build Docker_Lean_LEDE_N1
 
 on:
   repository_dispatch:
@@ -16,19 +16,19 @@ on:
     branches:
       - main
     paths:
-      - 'Lienol_Docker_OpenWrt_N1.config'
+      - 'Docker_Lean_LEDE_N1.config'
       - 'n1/**'
-      - '.github/workflows/Lienol_Docker_OpenWrt_N1.yml'
-  schedule:
-    - cron: 0 6 1/3 * *
+      - '.github/workflows/Docker_Lean_LEDE_N1.yml'
+#  schedule:
+#    - cron: 0 6 1/3 * *
   watch:
     types: started
 
 env:
-  REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: 19.07
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: Lienol_Docker_OpenWrt_N1.config
+  CONFIG_FILE: Docker_Lean_LEDE_N1.config
   DIY_P1_SH: diy-part0.sh
   DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
@@ -82,8 +82,9 @@ jobs:
 
     - name: Config - n1 docker openwrt build config
       run: |
-        [ -e n1/diy.sh ] && mv n1/diy.sh openwrt/diy.sh
+        [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        [ -e n1/diy.sh ] && mv n1/diy.sh openwrt/diy.sh
         cd openwrt
         [ -e diy.sh ] && chmod +x diy.sh && bash diy.sh
 
@@ -128,7 +129,7 @@ jobs:
     - name: Upload - push to artifact file
       uses: actions/upload-artifact@v1
       with:
-        name: Lean_Docker_LEDE_N1
+        name: Docker_Lean_LEDE_N1
         path: /mnt/n1/opt/imgs
 
 
@@ -136,7 +137,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: Lean_Docker_LEDE_N1_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: Docker_Lean_LEDE_N1_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: /mnt/n1/opt/imgs
 
     - name: Organize files
@@ -152,7 +153,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: Lean_Docker_LEDE_N1${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: Docker_Lean_LEDE_N1${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
