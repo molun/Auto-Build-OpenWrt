@@ -14,7 +14,9 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-sed -i '$a src-git small8 https://github.com/kenzok8/small-package' feeds.conf.default
+#sed -i '$a src-git small8 https://github.com/kenzok8/small-package' feeds.conf.default
+sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
  
 # Define My Package
 #git clone https://github.com/vernesong/OpenClash package/molun/luci-app-openclash
