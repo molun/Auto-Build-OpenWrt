@@ -25,6 +25,7 @@ echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.defau
 #git clone https://github.com/vernesong/OpenClash package/molun/luci-app-openclash
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome package/molun/luci-app-adguardhome
 git clone https://github.com/jerrykuku/luci-app-jd-dailybonus package/molun/luci-app-jd-dailybonus
+git clone https://github.com/vernesong/OpenClash package/molun/luci-app-openclash
 #git clone https://github.com/sirpdboy/luci-theme-opentopd package/molun/luci-theme-opentopd
 git clone -b 18.06 https://github.com/kiddin9/luci-theme-edge package/molun/luci-theme-edge
 git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon package/molun/luci-theme-argon
