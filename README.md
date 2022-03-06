@@ -17,6 +17,11 @@ Build OpenWrt using GitHub Actions
 ![Build Lean_LEDE_Redmi_AC2100](https://github.com/molun/Auto-Build-OpenWrt/workflows/Build%20Lean_LEDE_Redmi_AC2100/badge.svg)
 
 
+## Config
+```
+rm -f .config.old && make defconfig && ./scripts/diffconfig.sh > seed.config && cat seed.config
+```
+
 ## Usage
 
 - Click the [Use this template](https://github.com/molun/Auto-Build-OpenWrt/generate) button to create a new repository.
