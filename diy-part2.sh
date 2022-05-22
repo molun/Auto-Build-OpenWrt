@@ -21,7 +21,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci
 #sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
 # 修改主机名称
-#sed -i 's/OpenWrt/HIWIFI-B70/g' package/base-files/files/bin/config_generate
+#sed -i 's/OpenWrt/HIWIFI-HC5962/g' package/base-files/files/bin/config_generate
 
 # 修改版本号
 sed -i "s/OpenWrt /MOLUN build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
